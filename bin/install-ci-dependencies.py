@@ -121,6 +121,11 @@ def get_android_full_version_url():
       return 'http://dl.google.com/android/repository/android-ndk-r11c-darwin-x86_64.zip', '4ce8e7ed8dfe08c5fe58aedf7f46be2a97564696',
     if platform.system() == 'Linux':
       return 'http://dl.google.com/android/repository/android-ndk-r11c-linux-x86_64.zip', 'de5ce9bddeee16fb6af2b9117e9566352aa7e279',
+  if toolchain.startswith('android-ndk-r15c-'):
+    if platform.system() == 'Darwin':
+      return 'https://dl.google.com/android/repository/android-ndk-r15c-darwin-x86_64.zip', 'ea4b5d76475db84745aa8828000d009625fc1f98',
+    if platform.system() == 'Linux':
+      return 'https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip', '0bf02d4e8b85fd770fd7b9b2cdec57f9441f27a2',
   sys.exit('Android supported only for Linux and OSX')
 
 def get_android_url():
@@ -136,23 +141,28 @@ def get_android_url():
       return 'https://github.com/hunter-packages/android-ndk/releases/download/v1.0.1/android-ndk-r11c-arm-linux-androideabi-4.9-gnu-libstdc.-4.9-armeabi-v7a-android-19-arch-arm-Linux.tar.gz', '2e0da01961e0031bfd7d8db6ce4a15372bd8c3e8'
     if platform.system() == 'Darwin':
       return 'https://github.com/hunter-packages/android-ndk/releases/download/v1.0.1/android-ndk-r11c-arm-linux-androideabi-4.9-gnu-libstdc.-4.9-armeabi-v7a-android-19-arch-arm-Darwin.tar.gz', '664b3c8104142de2af16f887c19d1b2e618725cb'
+  if toolchain == 'android-ndk-r15c-api-21-armeabi-v7a-neon-clang-libcxx':
+    if platform.system() == 'Linux':
+      return 'https://github.com/hunter-packages/android-ndk/releases/download/v1.0.1/android-ndk-r15c-arm-linux-androideabi-4.9-llvm-libc.-android-21-arch-arm-Linux.tar.gz', '952403abedc3960b6d6eee35aeed940d935baaea'
+    if platform.system() == 'Darwin':
+      return 'https://github.com/hunter-packages/android-ndk/releases/download/v1.0.1/android-ndk-r15c-arm-linux-androideabi-4.9-llvm-libc.-android-21-arch-arm-Darwin.tar.gz', '978ef8b724dc3691a128d8f48a8440172478d82b'
   return get_android_full_version_url()
 
 def get_cmake_url():
   if platform.system() == 'Darwin':
     return (
-        'https://github.com/ruslo/CMake/releases/download/v3.8.0/cmake-3.8.0-Darwin-x86_64.tar.gz',
-        '36b2d3a10ff10ece72e3e5c50662871e0884522f'
+        'https://github.com/ruslo/CMake/releases/download/v3.10.0/cmake-3.10.0-Darwin-x86_64.tar.gz',
+        '138969f81f8774c8ff5978f75efc2e98deb205e5'
     )
   elif platform.system() == 'Linux':
     return (
-        'https://github.com/ruslo/CMake/releases/download/v3.8.0/cmake-3.8.0-Linux-x86_64.tar.gz',
-        '658659622cb743b6982d22452c668f063fe30928'
+        'https://github.com/ruslo/CMake/releases/download/v3.10.0/cmake-3.10.0-Linux-x86_64.tar.gz',
+        '6c8429b52c9e184c22d5ee8003010e347b65490c'
     )
   elif platform.system() == 'Windows':
     return (
-        'https://github.com/ruslo/CMake/releases/download/v3.8.0/cmake-3.8.0-win64-x64.zip',
-        'cf883ec577200b5562ee271390576065fbe042cb'
+        'https://github.com/ruslo/CMake/releases/download/v3.10.0/cmake-3.10.0-win64-x64.zip',
+        '104787243a5743f96e38064921ad364c627908ee'
     )
   else:
     sys.exit('Unknown system: {}'.format(platform.system()))
@@ -209,8 +219,8 @@ if is_android:
 
 if is_ninja:
   ninja = FileToDownload(
-      'https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-win.zip',
-      '2c35df2a60d16138d289a54522aca23048ac2ff4',
+      'https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip',
+      '637cc6e144f5cc7c6388a30f3c32ad81b2e0442e',
       ninja_archive_local,
       ci_dir
   )
