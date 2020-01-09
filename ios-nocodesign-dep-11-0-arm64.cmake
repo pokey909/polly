@@ -11,7 +11,6 @@ include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_clear_environment_variables.c
 
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_init.cmake")
 
-set(IOS_SDK_VERSION 12.1)
 set(IOS_DEPLOYMENT_SDK_VERSION 11.0)
 
 set(POLLY_XCODE_COMPILER "clang")
